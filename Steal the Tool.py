@@ -1,4 +1,4 @@
-import pygame #importing pygame
+import pygame, sys #importing pygame
 
 pygame.init() #initializes all pygame modules
 
@@ -655,8 +655,9 @@ def main_menu():
     Returns:
     None
     """
-    
     while True:
+        run = True
+
         # Display the background image on the screen
         screen.blit(pygame.image.load('Steal the Tool/assets/Background.png'),(0,0))
 
@@ -672,15 +673,17 @@ def main_menu():
         screen.blit(menu_text, menu_rect)
         screen.blit(instructions_text, instructions_rect)
 
-        # Handle events (user input)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit() # Quit the game if the window close button is clicked
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    play() # Call the play function if the Space key is pressed (Starts the actual game)
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit() # Quit the game if the Escape key is pressed
-
-        pygame.display.update() # Update the display to show the changes
+        while run == True:
+            # Handle events (user input)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False # Quit the game if the window close button is clicked
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        play() # Call the play function if the Space key is pressed
+                    if event.key == pygame.K_ESCAPE:
+                        run = False # Quit the game if the Escape key is pressed
+            pygame.display.update() # Update the display to show the changes
+        pygame.quit()
+        sys.exit()
 main_menu() #Starts the game in the menu and then user input decides what happens from there
