@@ -1,13 +1,14 @@
-import pygame #importing pygame so our game would work
+import pygame #importing pygame
 
-pygame.init() #starts pygame and lets us use the functions
+pygame.init() #initializes all pygame modules
 
 width = 1280
 height = 720
 screen = pygame.display.set_mode((width,height), pygame.FULLSCREEN)
 #line 5-7 are creating the screen for our game
 
-start = 0             #assigning values to the different rooms in the game so we can display images and texts accordingly
+#assigning values to the different rooms in the game so we can display images and texts accordingly
+start = 0           
 goose_choice1 = 1
 goose_choice2 = 2
 goose_choice3 = 3
@@ -50,41 +51,75 @@ rat_death_choice = 39
 goose_death_choice = 40
 
 
-def get_font(size):  
+def get_font(size): 
+    """
+    Get a Pygame font with the specified size.
+
+    Parameters:
+    - size (int): The size of the font to be created.
+
+    Returns:
+    - pygame.font.Font: A Pygame font object with the specified size.
+    """
+    
     return pygame.font.Font('Steal the Tool/assets/Marlboro.ttf', size)
 
+#gets a font with a specified size, using a font file located in the 'Steal the Tool/assets/' directory
 text_font = get_font(20)
 
 def play():
-    current_state = start
-    goose_death = False
-    while True:
-        y = 0
+    """
+    The main gameplay function where the player navigates through the storyline
+    by making choices and experiencing different outcomes.
 
-        for event in pygame.event.get(): #if the current event is quit then the game is quit
-            if event.type == pygame.QUIT:
-                pygame.quit()
+    This function manages the game's state transitions, displaying images and text
+    based on the player's choices. The player progresses through various scenarios and
+    interacting with NPCs.
+
+    The game continues until the player reaches a win, death, or another outcome,
+    at which point they are directed back to the main menu.
+
+    Attributes:
+    - current_state: An integer representing the current state of the game.
+    - goose_death: A boolean flag indicating whether the player's first choice led to goose death in the end.
+
+    Controls:
+    - Keyboard input: The player uses the keyboard to make choices by pressing specific keys.
+    - Escape key: Returns the player to the main menu.
+
+    Returns:
+    None
+    """
+    
+    current_state = start #Starts the game off in the start room
+    goose_death = False #A boolean that if switched to True, will make the player lose even if he actually technically won the game
+    while True:
+        y = 0 #Defines y as 0 originally, but is only relevant later on in the code
+
+        for event in pygame.event.get(): #
+            if event.type == pygame.QUIT: 
+                pygame.quit() #Quit the game if the window close button is clicked
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    main_menu()
-                if current_state == start: #game starts, images and texts will be shown on the screen. this continues on for many many lines.
-                    if event.key == pygame.K_1: 
+                    main_menu() #If escape is clicked, the game returns to the main menu
+                if current_state == start: #game starts, images and texts will be shown on the screen. This continues on for many many lines.
+                    if event.key == pygame.K_1: #If the 1 key is clicked, the room changes accordingly
                         current_state = goose_choice1
-                    elif event.key == pygame.K_2: 
+                    elif event.key == pygame.K_2: #If the 2 key is clicked, the room changes accordingly
                         current_state = goose_choice2
-                    elif event.key == pygame.K_3: 
+                    elif event.key == pygame.K_3: #If the 3 key is clicked, the room changes accordingly
                         current_state = goose_choice3
-                    elif event.key == pygame.K_4: 
+                    elif event.key == pygame.K_4: #If the 4 key is clicked, the room changes accordingly
                         current_state = goose_choice4
                 elif current_state == goose_choice1:
-                    current_state = win_choice #first win
+                    current_state = win_choice #First win option (easy)
                 elif current_state == goose_choice2:
-                    current_state = pre_building_choice
+                    current_state = pre_building_choice #pre choices are used as a way to give the options to the user and then the actual choices without the pre preceding the rest of the name continues the story
                 elif current_state == goose_choice3:
                     current_state = pre_building_choice
-                elif current_state == goose_choice4: #our first choice that will affect how the game will end. This choice will give you a different ending.
-                    goose_death = True
-                    current_state = pre_building_choice
+                elif current_state == goose_choice4: #Our first choice that will affect how the game will end. This choice will give you a different ending when you actually beat the game.
+                    goose_death = True #Goose death changed to True if you bully the goose
+                    current_state = pre_building_choice 
                 elif current_state == pre_building_choice:
                     if event.key == pygame.K_1: 
                         current_state = building_choice1
@@ -119,8 +154,8 @@ def play():
                     elif event.key == pygame.K_3: 
                         current_state = E7_choice3
                 elif current_state == E7_choice1:
-                    current_state = pre_claudio_choice #claudio choice
-                elif current_state == pre_claudio_choice:
+                    current_state = pre_claudio_choice 
+                elif current_state == pre_claudio_choice: #Claudio choices (one will kill you, and the other won't change anything)
                     if event.key == pygame.K_1: 
                         current_state = claudio_choice1
                     elif event.key == pygame.K_2: 
@@ -130,8 +165,8 @@ def play():
                 elif current_state == claudio_choice2:
                     current_state = pre_E7_choice1
                 elif current_state == E7_choice2:
-                    current_state = pre_dante_choice #dante choice
-                elif current_state == pre_dante_choice:
+                    current_state = pre_dante_choice
+                elif current_state == pre_dante_choice: #Dante choices (one will allow you to progress the game, the others will kill you)
                     if event.key == pygame.K_1: 
                         current_state = dante_choice1
                     elif event.key == pygame.K_2: 
@@ -140,7 +175,7 @@ def play():
                         current_state = dante_choice3
                 elif current_state == dante_choice1:
                     current_state = pre_E7_choice2
-                elif current_state == pre_E7_choice2:
+                elif current_state == pre_E7_choice2: #pre_E7_choice2 is practically the same as the other one, but it has one extra room (the broken elevator), which will allow the player to progress. If they do not go to the broken elevator room and instead go a route that doesn't include taking the ladder from Dante, they will either die or go back to pre_E7_choice1
                     if event.key == pygame.K_1: 
                         current_state = E7_choice1
                     elif event.key == pygame.K_2: 
@@ -191,29 +226,36 @@ def play():
                 elif current_state == escape_choice2:
                     current_state = death_choice
                 elif current_state == escape_choice3:
-                    if goose_death == False:
+                    if goose_death == False:  #If goose death is still False and the player manages to finish the game, they actually get to win
                         current_state = win_choice
-                    elif goose_death == True:
+                    elif goose_death == True: #If goose death is True, they still die at the end and don't win
                         current_state = goose_death_choice
                 elif current_state == goose_death_choice:
                     current_state = death_choice
                 elif current_state == win_choice:
-                    main_menu()
+                    main_menu() #Returns to the menu if the player wins
                 elif current_state == death_choice:
-                    main_menu()
+                    main_menu() #Returns to the menu if the player dies
                 elif current_state == rat_death_choice:
-                    main_menu()
+                    main_menu() #Returns to the menu if the player dies of rat death
 
+        # Check the current state of the game and display corresponding text and images
         if current_state == start:
+            #Fill the screen with a black screen
             screen.fill('black')
+            #Displays an image onto the screen. The (53, 0) is where the image will be printed onto the screen (53 pixels from the left and 0 pixels from the top)
             screen.blit(pygame.image.load('Steal the Tool/assets/campus.png'),(53,0))
+            #Overlay text on the screen based on the current state and user choices
             text = ['You are a UofT student who has come to the University of Waterloo campus for one thing.', 'You want to STEAL the TOOL!!!!', 'You cann\'t help but notice that the campus is much nicer than that of UofT.', 'You came to Waterloo to steal the TOOL because you feel that if UofT had the TOOL, the school will finally have the best engineering program in Canada.', 'Before you begin your search, a goose approaches you. What should you do?', '1. Give the goose $20', '2. Give goose a treat', '3. Ignore goose', '4. Frighten goose', '(choose by pressing number associated with option)']
-            pygame.draw.rect(screen,'light gray',[0,515,width,205])
-            for line in text:
-                written_text = text_font.render(line, True, 'black')
-                text_rect = written_text.get_rect(topleft = (10,height-20*len(text)+y))
-                screen.blit(written_text,text_rect)
-                y+=20
+            pygame.draw.rect(screen,'light gray',[0,515,width,205]) #Draws a rectangle which is where the text will be written
+            for line in text: #For every string in the text list
+                written_text = text_font.render(line, True, 'black') #Renders the text 
+                text_rect = written_text.get_rect(topleft = (10,height-20*len(text)+y)) #Where the text will be printed in the rectangle (10 pixels from the left of the screen and then just high enough that the text wont be printed out of the rectangle using the length of the text list)
+                screen.blit(written_text,text_rect) #Writes the text in the rectangle. The for loop allows the text to be printed on different lines instead of on just one big line
+                y+=20 #prints with a 20 pixel vertical offset
+                
+     #The same code is used for almost all of the rooms with the only difference being the text and the image that is printed as well as text_rect which will use midleft and a slightly different y value
+        
         if current_state == goose_choice1:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal the Tool/assets/goose_victory.png'),(362,0))
@@ -576,7 +618,7 @@ def play():
                 y+=20
         elif current_state == death_choice:
             screen.fill('black')
-            screen.blit(pygame.image.load('Steal the Tool/assets/you_died.png'),(0,0))
+            screen.blit(pygame.image.load('Steal the Tool/assets/you_died.png'),(0,0)) #Only prints the image as this room does not require any text
         elif current_state == rat_death_choice:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal the Tool/assets/rat_death.png'),(359,0))
@@ -589,7 +631,7 @@ def play():
                 y+=20
         elif current_state == win_choice:
             screen.fill('black')
-            screen.blit(pygame.image.load('Steal the Tool/assets/win.png'),(265,0))
+            screen.blit(pygame.image.load('Steal the Tool/assets/win.png'),(265,0)) #Only prints the image as this room does not require any text
         elif current_state == goose_death_choice:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal the Tool/assets/goose_death.png'),(374,0))
@@ -600,29 +642,45 @@ def play():
                 text_rect = written_text.get_rect(topleft = (10, height - 20*len(text)+y-(200/len(text))))
                 screen.blit(written_text,text_rect)
                 y+=20
-        pygame.display.flip()
+        pygame.display.flip() #Updates the entire display surface to the screen
 
 def main_menu():
+    """
+    Display the main menu screen and handle user input.
+
+    The function continuously displays the main menu screen, including the game title
+    and instructions to start the game. It waits for user input and responds to the
+    Space key to initiate the game or the Escape key to quit the game.
+
+    Returns:
+    None
+    """
+    
     while True:
+        # Display the background image on the screen
         screen.blit(pygame.image.load('Steal the Tool/assets/Background.png'),(0,0))
 
+        # Render the game title text
         menu_text = get_font(100).render('STEAL THE TOOL', True, 'black')
         menu_rect = menu_text.get_rect(center = (width/2,height-600))
 
+        # Render the instructions text
         instructions_text = get_font(50).render('Press Space to Start', True, 'black')
         instructions_rect = instructions_text.get_rect(center = (width/2,height-120))
 
+        # Display the rendered text on the screen
         screen.blit(menu_text, menu_rect)
         screen.blit(instructions_text, instructions_rect)
 
+        # Handle events (user input)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                pygame.quit() # Quit the game if the window close button is clicked
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    play()
+                    play() # Call the play function if the Space key is pressed (Starts the actual game)
                 if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
+                    pygame.quit() # Quit the game if the Escape key is pressed
 
-        pygame.display.update()
-main_menu()
+        pygame.display.update() # Update the display to show the changes
+main_menu() #Starts the game in the menu and then user input decides what happens from there
