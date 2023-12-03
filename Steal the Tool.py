@@ -4,7 +4,7 @@ pygame.init() #initializes all pygame modules
 
 width = 1280
 height = 720
-screen = pygame.display.set_mode((width,height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((width,height))
 #line 5-7 are creating the screen for our game
 
 #assigning values to the different rooms in the game so we can display images and texts accordingly
@@ -62,7 +62,7 @@ def get_font(size):
     - pygame.font.Font: A Pygame font object with the specified size.
     """
     
-    return pygame.font.Font('Steal the Tool/assets/Marlboro.ttf', size)
+    return pygame.font.Font(None, size)
 
 #gets a font with a specified size, using a font file located in the 'Steal the Tool/assets/' directory
 text_font = get_font(20)
