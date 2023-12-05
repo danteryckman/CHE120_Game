@@ -403,7 +403,7 @@ def play():
         elif current_state == E7_choice2:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal-the-Tool-main/assets/dante.png'),(363,0))
-            text = ['You decide to check the study lounge for the TOOL. You think they may have it on display to give the','Engineering students some power by being in it\s presence. You search for about 10 minutes before seeing','a student named Dante sitting in a chair, working on a project called \“Steal the Tool\”. You approach','him and begin to make conversation about Waterloo things to try and gain his trust. Eventually, he','offers you an item from the table in front of him as a kind gesture. You think these items are a bit','weird to be a kind gesture, but you realize these items have potential to be useful for you.']
+            text = ['You decide to check the study lounge for the TOOL. You think they may have it on display to give the','Engineering students some power by being in it\s presence. You search for about 10 minutes before seeing','a student named Dante sitting in a chair, working on a project called “Steal the Tool”. You approach','him and begin to make conversation about Waterloo things to try and gain his trust. Eventually, he','offers you an item from the table in front of him as a kind gesture. You think these items are a bit','weird to be a kind gesture, but you realize these items have potential to be useful for you.']
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
