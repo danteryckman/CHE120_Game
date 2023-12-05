@@ -690,4 +690,4 @@ def main_menu():
             pygame.display.update() # AH - Update the display to show the changes
         pygame.quit()
         sys.exit()
-main_menu() #Starts the game in
+main_menu() #Starts the game in the main menu
