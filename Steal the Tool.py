@@ -357,7 +357,7 @@ def play():
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
-                text_rect = written_text.get_rect(topleft = (10,height-20*len(text)+y-(200/len(text))))
+                text_rect = written_text.get_rect(topleft = (10,height-19*len(text)+y-(200/len(text))))
                 screen.blit(written_text,text_rect)
                 y+=20
         elif current_state == adam_choice1:
