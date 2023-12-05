@@ -256,14 +256,14 @@ def play():
                 written_text = text_font.render(line, True, 'white') # DR - Renders the text 
                 text_rect = written_text.get_rect(topleft = (10,height-20*len(text)+y)) # DR - Where the text will be printed in the rectangle (10 pixels from the left of the screen and then just high enough that the text wont be printed out of the rectangle using the length of the text list)
                 screen.blit(written_text,text_rect) # DR - Writes the text in the rectangle. The for loop allows the text to be printed on different lines instead of on just one big line
-                y+=20 # DR - prints with a 20 pixel vertical offset
+                y+=19 # DR - prints with a 19 pixel vertical offset (The rest have 20 pixel offsets, but this one has more text than the others)
                 
      # DR - The same code is used for almost all of the rooms with the only difference being the text and the image that is printed as well as text_rect which will use midleft and a slightly different y value
         
         if current_state == goose_choice1:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal-the-Tool-main/assets/goose_victory.png'),(362,0))
-            text = ['The goose appreciated the gesture so much it decided to become a real life Deus ex Machina.', 'It flew away and you hear incredibly loud explosions before you spot a shadow in the sky.', 'The goose returns with what appears to be the TOOL in its wings!!', 'You thank the goose and return to Toronto to gift the school with a most precious prize']
+            text = ['The goose appreciated the gesture so much it decided to become a real life Deus ex Machina.', 'It flew away and you hear incredibly loud explosions before you spot a shadow in the sky.', 'The goose returns with what appears to be the TOOL in its wings!!', 'You thank the goose and return to Toronto to gift the school with a most precious prize','','Press space to proceed']
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
@@ -273,7 +273,7 @@ def play():
         elif current_state == goose_choice2:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal-the-Tool-main/assets/goose_treat.png'),(369,0))
-            text = ['The goose appreciates the treat and jumps around with glee.', 'Your heart fills with a warmth you have never experienced before at UofT', 'You walk away feeling whole, a feeling you have not experienced in a long time. You feel like your journey to find the', 'Tool will be a lot more sucessful']
+            text = ['The goose appreciates the treat and jumps around with glee.', 'Your heart fills with a warmth you have never experienced before at UofT', 'You walk away feeling whole, a feeling you have not experienced in a long time. You feel like your journey to find the', 'Tool will be a lot more sucessful','','Press space to proceed']
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
@@ -283,7 +283,7 @@ def play():
         elif current_state == goose_choice3:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal-the-Tool-main/assets/ignore_goose.png'),(380,0))
-            text = ['You choose to ignore the goose because you don\'t have the time for stupid goose.', 'Before arriving on campus, you forgot to do a google search to find where the TOOL is being held. You pull out', 'your phone to check but realise you have no signal. Instead of finding any nearby wifi sources, you attempt to guess where it is off pure intuition alone', 'You have a strong feeling the TOOL is being held in 1 of 4 buildings']
+            text = ['You choose to ignore the goose because you don\'t have the time for stupid goose.', 'Before arriving on campus, you forgot to do a google search to find where the TOOL is being held. You pull out', 'your phone to check but realise you have no signal. Instead of finding any nearby wifi sources, you attempt to guess where it is off pure intuition alone', 'You have a strong feeling the TOOL is being held in 1 of 4 buildings','','Press space to proceed']
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
@@ -293,7 +293,7 @@ def play():
         elif current_state == goose_choice4:
             screen.fill('black')
             screen.blit(pygame.image.load('Steal-the-Tool-main/assets/goose_scare.png'),(380,0))
-            text = ['The goose is visibly distraught and begins running away towards its fellow geese.', 'You feel satisfied with yourself as you are an evildoer who attends an inferior university. As you walk away you glance out of', 'the corner of your eye the goose seemingly huddled together discussing something. You think nothing of it and walk away.']
+            text = ['The goose is visibly distraught and begins running away towards its fellow geese.', 'You feel satisfied with yourself as you are an evildoer who attends an inferior university. As you walk away you glance out of', 'the corner of your eye the goose seemingly huddled together discussing something. You think nothing of it and walk away.','','Press space to proceed']
             pygame.draw.rect(screen,'dark gray',[0,520,width,200])
             for line in text:
                 written_text = text_font.render(line, True, 'white')
